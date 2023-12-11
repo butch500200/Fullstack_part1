@@ -20,12 +20,10 @@ const Content = (props) => {
   return (
     <>
       {Object.entries(props.classes).map(([className, exercisesCount]) => (
-        <>
-          <Part
-            class={{ Name: className, exercises: exercisesCount }}
-            key={className}
-          ></Part>
-        </>
+        <Part
+          key={className}
+          class={{ Name: className, exercises: exercisesCount }}
+        ></Part>
       ))}
     </>
   );
