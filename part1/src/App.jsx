@@ -10,8 +10,8 @@ const Header = (props) => {
 const Part = (props) => {
   return (
     <>
-      <h1>class:{props.class.Name}</h1>
-      <p>Number of exercises: {props.class.exercises}</p>
+      <h1>class:{props.course.name}</h1>
+      <p>Number of exercises: {props.course.exercises}</p>
     </>
   );
 };
@@ -19,11 +19,8 @@ const Part = (props) => {
 const Content = (props) => {
   return (
     <>
-      {Object.entries(props.classes).map(([className, exercisesCount]) => (
-        <Part
-          key={className}
-          class={{ Name: className, exercises: exercisesCount }}
-        ></Part>
+      {props.classes.map((course) => (
+        <Part key={course.name} course={course}></Part>
       ))}
     </>
   );
@@ -31,12 +28,12 @@ const Content = (props) => {
 
 const Total = (props) => {
   var total = 0;
-  Object.entries(props.classes).forEach(([key, value]) => {
-    total += value;
+  props.classes.forEach((course) => {
+    total += course.exercises;
   });
   return (
     <>
-      <p>Total creadits:{total}</p>
+      <h3>Total creadits:{total}</h3>
     </>
   );
 };
@@ -44,17 +41,19 @@ const Total = (props) => {
 const App = () => {
   // const-definitions
   const course = "Half Stack application development";
-  const part1 = "Fundamentals of React";
-  const exercises1 = 10;
-  const part2 = "Using props to pass data";
-  const exercises2 = 7;
-  const part3 = "State of a component";
-  const exercises3 = 14;
-  const classes = {
-    [part1]: exercises1,
-    [part2]: exercises2,
-    [part3]: exercises3,
+  const part1 = {
+    name: "Fundamentals of React",
+    exercises: 10,
   };
+  const part2 = {
+    name: "Using props to pass data",
+    exercises: 7,
+  };
+  const part3 = {
+    name: "State of a component",
+    exercises: 14,
+  };
+  const classes = [part1, part2, part3];
   return (
     <div>
       <Header course={course} />
