@@ -7,13 +7,24 @@ const Header = (props) => {
   );
 };
 
+const Part = (props) => {
+  return (
+    <>
+      <h1>class:{props.class.Name}</h1>
+      <p>Number of exercises: {props.class.exercises}</p>
+    </>
+  );
+};
+
 const Content = (props) => {
   return (
     <>
-      {Object.entries(props.classes).map(([key, value]) => (
+      {Object.entries(props.classes).map(([className, exercisesCount]) => (
         <>
-          <h key={key}>class:{key}</h>
-          <p>Number of exercises: {value}</p>
+          <Part
+            class={{ Name: className, exercises: exercisesCount }}
+            key={className}
+          ></Part>
         </>
       ))}
     </>
@@ -42,9 +53,9 @@ const App = () => {
   const part3 = "State of a component";
   const exercises3 = 14;
   const classes = {
-    part1: exercises1,
-    part2: exercises2,
-    part3: exercises3,
+    [part1]: exercises1,
+    [part2]: exercises2,
+    [part3]: exercises3,
   };
   return (
     <div>
