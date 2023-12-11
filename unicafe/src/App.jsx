@@ -8,10 +8,18 @@ const Button = ({ handleClick, text }) => {
   );
 };
 
+const StatisticLine = ({ text, value }) => {
+  return (
+    <p>
+      {text}:{value}
+    </p>
+  );
+};
+
 const Statistics = ({ good, neutral, bad }) => {
   let total = good + bad + neutral;
   let avg = (good - bad) / total;
-  let postitivePer = (good / total) * 100;
+  let postitivePer = (good / total) * 100 + "%";
 
   if (total === 0) {
     return (
@@ -24,12 +32,12 @@ const Statistics = ({ good, neutral, bad }) => {
   return (
     <>
       <h2>Statistics</h2>
-      <p>good:{good}</p>
-      <p>neutral:{neutral}</p>
-      <p>bad:{bad}</p>
-      <p>total:{total}</p>
-      <p>average:{avg}</p>
-      <p>positive {postitivePer}%</p>
+      <StatisticLine text="good" value={good}></StatisticLine>
+      <StatisticLine text="neutral" value={neutral}></StatisticLine>
+      <StatisticLine text="bad" value={bad}></StatisticLine>
+      <StatisticLine text="total" value={total}></StatisticLine>
+      <StatisticLine text="average" value={avg}></StatisticLine>
+      <StatisticLine text="positive" value={postitivePer}></StatisticLine>
     </>
   );
 };
