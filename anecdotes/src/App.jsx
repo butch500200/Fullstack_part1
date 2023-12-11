@@ -1,5 +1,39 @@
 import { useState } from "react";
 
+const Votes = ({ votes }) => {
+  if (votes === undefined || votes === 0) {
+    return (
+      <>
+        <h3>Has no votes</h3>
+      </>
+    );
+  }
+  return (
+    <>
+      <h3>Has {votes} votes</h3>
+    </>
+  );
+};
+
+const MostVoted = ({ anecdotes, points }) => {
+  if (points.length === 0) {
+    return <></>;
+  }
+  let maxIndex = 0;
+  for (let i = 0; i < points.length; i++) {
+    if (points[i] > points[maxIndex]) {
+      maxIndex = i;
+    }
+  }
+
+  return (
+    <>
+      <h3>{anecdotes[maxIndex]}</h3>
+      <Votes votes={points[maxIndex]}></Votes>
+    </>
+  );
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -34,21 +68,6 @@ const App = () => {
     }
   };
 
-  const Votes = ({ votes }) => {
-    if (votes === undefined || votes === 0) {
-      return (
-        <>
-          <h3>Has no votes</h3>
-        </>
-      );
-    }
-    return (
-      <>
-        <h3>Has {votes} votes</h3>
-      </>
-    );
-  };
-
   return (
     <div>
       <h3>{anecdotes[selected]}</h3>
@@ -56,8 +75,8 @@ const App = () => {
       <button onClick={() => setSelected(getRandomInt(anecdotes.length))}>
         Next
       </button>
-
       <button onClick={() => handleVotes(selected)}>Vote</button>
+      <MostVoted anecdotes={anecdotes} points={points}></MostVoted>
     </div>
   );
 };
